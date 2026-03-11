@@ -1,0 +1,20 @@
+model HabitLog {
+  id        String   @id @default(uuid())
+  date      DateTime
+  completed Boolean  @default(false)
+  proofUrl  String?  @default("") @map("proof_url")
+
+  // Relations
+  tenantId String     @map("tenant_id")
+  habitId  String     @map("habit_id")
+  userId   String     @map("user_id")
+  habit    MicroHabit @relation(fields: [habitId], references: [id])
+  user     User       @relation(fields: [userId], references: [id])
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([habitId, userId, date])
+  @@index([tenantId, userId, date])
+  @@map("habit_logs")
+}

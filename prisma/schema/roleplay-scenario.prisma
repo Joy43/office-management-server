@@ -1,0 +1,27 @@
+
+// RoleplayScenario - Library of roleplay scenarios
+// Can be global or tenant-specific
+model RoleplayScenario {
+id String @id @default(uuid())
+tenantId String? @map("tenant_id")
+title String @db.VarChar(255)
+scenario String @db.Text// Banking, Retail, Healthcare, etc.
+difficulty DifficultyLevel
+durationMin Int @default(15) @map("duration_min")
+videoUrl String? @map("video_url") @db.Text
+createdAt DateTime @default(now()) @map("created_at")
+updatedAt DateTime @updatedAt @map("updated_at")
+
+// Relations
+roleplays Roleplay[]
+
+@@index([tenantId])
+@@map("roleplay_scenarios")
+}
+
+enum DifficultyLevel {
+Easy
+Medium
+Hard
+Expert
+}

@@ -1,0 +1,31 @@
+model Program {
+  id String @id @default(uuid())
+
+  templateId    String?       @map("template_id")
+  name          String        @default("")
+  startDate     DateTime      @map("start_date") @db.Date
+  endDate       DateTime      @map("end_date") @db.Date
+  targets       Json?         @default("{}")
+  programStatus ProgramStatus @default(ACTIVE)
+
+  tenantId String @map("tenant_id")
+  branchId String @map("branch_id")
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  // Relations
+
+  branch   Branch    @relation(fields: [branchId], references: [id], onDelete: Cascade)
+  sessions Session[]
+
+  @@index([tenantId, branchId])
+  @@map("programs")
+}
+
+enum ProgramStatus {
+  ACTIVE
+  COMPLETED
+  ONHOLD
+  CANCELLED
+}

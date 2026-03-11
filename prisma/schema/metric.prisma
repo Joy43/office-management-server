@@ -1,0 +1,26 @@
+model Metric {
+  id         String     @id @default(uuid())
+  tenantId   String     @map("tenant_id")
+  branchId   String?    @map("branch_id")
+  MatricType MetricType
+  value      String     @default("")
+  date       DateTime   @db.Date
+  source     String?    @default("")
+
+  // Relations
+  branch    Branch?  @relation(fields: [branchId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([tenantId, branchId, MatricType, date])
+  @@map("metrics")
+}
+
+enum MetricType {
+  CSAT
+  Complaints
+  RepeatCustomer
+  TimeToResolve
+  NPS
+  FCR
+}

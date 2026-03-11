@@ -1,0 +1,25 @@
+model Template {
+  id           String   @id @default(uuid())
+  templateName String   @default("") @map("template_name")
+  type         String?  @default("")
+  timeLimit    String?  @default("15") @map("time_limit")
+  content      Json?
+  templatestatus   TempleteStatus @default(DARFT)
+  isGlobal     Boolean  @default(true) @map("is_global")
+  createdBy    String?  @map("created_by")
+  creator      User?            @relation(fields: [createdBy], references: [id])
+  tenantId     String?  @map("tenant_id")
+  createdAt    DateTime @default(now()) @map("created_at")
+  updatedAt    DateTime @updatedAt @map("updated_at")
+  isActive     Boolean? @default(true)
+  tenant       Tenant?  @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  @@index([tenantId])
+  @@index([isGlobal])
+  @@map("templates")
+}
+ 
+enum TempleteStatus {
+DARFT
+INPROGRESS
+COMPLETED
+}

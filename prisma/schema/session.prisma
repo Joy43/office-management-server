@@ -1,0 +1,45 @@
+model Session {
+  id           String   @id @default(uuid())
+  SessionTitle String   @default("") @map("session_title")
+  agenda       String?  @default("") @map("agenda")
+  scheduledAt  String   @map("scheduled_at")
+  speakerId    String?  @map("speaker_id")
+  speaker      User?    @relation("SessionSpeaker", fields: [speakerId], references: [id])
+  sessionMemberParticipants  User[]  @relation("SessionParticipants")
+  duration     String   @default("15") @map("duration_min")
+  meetingLink  String   @default("") @map("meeting_link")
+  materials    String[] @default([]) @map("materials")
+  SessionType  String   @default("") @map("session_type")
+  isActive     Boolean  @default(true) @map("is_active")
+
+  sessionstatus     SessionStatus    @default(DARFT) @map("status")
+  sessioncompliance ComplianceStatus @default(NOT_STARTED) @map("compliance_status")
+
+  // ---------------- Relations id -----------------
+  branchId  String?  @map("branch_id")
+  branch    Branch?  @relation(fields: [branchId], references: [id])
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  user      User?    @relation(fields: [userId], references: [id])
+  userId    String?
+  program   Program? @relation(fields: [programId], references: [id])
+  programId String?
+roleplays Roleplay[]
+  @@index([scheduledAt])
+  @@map("sessions")
+}
+
+enum SessionStatus {
+  PENDING
+  DARFT
+  SCHEDULE
+  COMPLETED
+  CANCELED
+}
+
+enum ComplianceStatus {
+  VERIFIED
+  UNVERIFIED
+  PENDING
+  NOT_STARTED
+}

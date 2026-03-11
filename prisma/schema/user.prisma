@@ -1,0 +1,127 @@
+model User {
+  id String @id @default(uuid())
+
+  name        String
+  email       String  @unique
+  password    String
+  phone       String? @default("")
+  locationLon String? @default("-71.0589")
+  locationLat String? @default("42.3601")
+
+  about          String?    @default("User about information")
+  username       String?    @unique
+  address        String?
+  dateOfBirth    DateTime?
+  role           UserRole   @default(USER)
+  status         UserStatus @default(ACTIVE)
+  coverPhoto     String?
+  isVerified     Boolean    @default(false)
+  isOnline       Boolean    @default(false)
+  lastLoginAt    DateTime?  @map("last_login_at")
+  lastActiveAt   DateTime?  @map("last_active_at")
+  profilePicture String?    @default("") @map("profile_picture")
+
+  // Settings
+  isLoginAlertsNotification      Boolean @default(true) @map("is_login_alerts_enabled")
+  is2FAEnabled                   Boolean @default(false) @map("is_2fa_enabled")
+  isEmailNotificationsEnabled    Boolean @default(true) @map("is_email_notifications_enabled")
+  isSmsNotificationsEnabled      Boolean @default(false) @map("is_sms_notifications_enabled")
+  isPushNotificationsEnabled     Boolean @default(true) @map("is_push_notifications_enabled")
+  isReceiveWhatsAppNotifications Boolean @default(false) @map("is_receive_whatsapp_notifications")
+  isDasktopNotificationsEnabled  Boolean @default(true) @map("is_desktop_notifications_enabled")
+  isReceiveSlackNotifications    Boolean @default(false) @map("is_receive_slack_notifications")
+  isDailySummariesEnabled        Boolean @default(false) @map("is_daily_summaries_enabled")
+
+  // ---------------------Relations-----------------------------
+  notifications          UserNotification[]
+  refreshTokens          RefreshToken[]
+  otps                   UserOtp[]
+  conversationsInitiated PrivateConversation[]  @relation("ConversationInitiator")
+  conversationsReceived  PrivateConversation[]  @relation("ConversationReceiver")
+  messagesSent           PrivateMessage[]
+  messageStatuses        PrivateMessageStatus[]
+  NotificationToggle     NotificationToggle?
+  sessions               Session[]
+  speakerSessions        Session[]              @relation("SessionSpeaker")
+  templates              Template[]
+  hostedCalls            Calling[] @relation("HostedCalls")
+  receivedCalls Calling[] @relation("ReceivedCalls")
+
+  tenant          Tenant?           @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  branch          Branch?           @relation(fields: [branchId], references: [id])
+  managedBranches BranchManager[]
+  integrations    UserIntegration[]
+
+  // facilitatedSessions Session[]
+  // attendances         Attendance[]
+  roleplays             Roleplay[]
+  habitLogs                 HabitLog[]
+  habitAssignments          HabitAssignment[] @relation("HabitAssignmentUser")
+  assignedHabits            HabitAssignment[] @relation("HabitAssignmentAssigner")
+  microHabits               MicroHabit[]
+  createdHuddles            Huddle[]          @relation("HuddleCreator")
+  participatingHuddles      Huddle[]          @relation("HuddleParticipants")
+  sessionMemberParticipants Session[]         @relation("SessionParticipants")
+  huddleParticipantStatuses HuddleParticipant[]   @relation("HuddleParticipantStatus")
+  // Coaching & Recognition
+  // coachingLogsAsManager   CoachingLog[] @relation("CoachingManager")
+  // coachingLogsAsStaff     CoachingLog[] @relation("CoachingStaff")
+  // coachingLogsApproved    CoachingLog[] @relation("CoachingApprover")
+  // recognitionsGiven       Recognition[] @relation("RecognitionFrom")
+  // recognitionsReceived    Recognition[] @relation("RecognitionTo")
+
+  tenantId  String?  @map("tenant_id")
+  branchId  String?  @map("branch_id")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@unique([tenantId, email])
+  @@index([tenantId, email])
+  @@index([branchId])
+  @@map("users")
+}
+
+model UserIntegration {
+  id String @id @default(uuid())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  provider             IntegrationProvider
+  isEnabledIntegration Boolean             @default(false)
+
+  // Optional OAuth data
+  accessToken  String?
+  refreshToken String?
+  expiresAt    DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@unique([userId, provider])
+  @@index([userId])
+  @@map("user_integrations")
+}
+
+enum IntegrationProvider {
+  SLACK
+  GOOGLE
+  APPLE
+}
+
+enum UserRole {
+  USER
+  ADMIN
+  SUPER_ADMIN
+  CLIENT_ADMIN
+  MANAGER
+  TAINER
+  EXECUTIVE
+  STAFF
+}
+
+enum UserStatus {
+  ACTIVE
+  INACTIVE
+  DELETED
+}

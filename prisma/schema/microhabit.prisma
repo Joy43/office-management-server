@@ -1,0 +1,41 @@
+model MicroHabit {
+  id            String   @id @default(uuid())
+  title         String
+  description   String?
+  points        String   @default("0") @map("points")
+
+  // ------------Relations
+  tenantId      String   @map("tenant_id")
+  userId        String   @map("user_id")
+  user          User     @relation(fields: [userId], references: [id])
+  
+  habitAddingId String?  @map("habit_adding_id")
+  habitAdding   HabitAdding? @relation(fields: [habitAddingId], references: [id])
+  
+  habitAssignments HabitAssignment[]
+  habitLogs        HabitLog[]
+  
+  createdAt     DateTime @default(now()) @map("created_at")
+  updatedAt     DateTime @updatedAt @map("updated_at")
+
+  @@index([tenantId])
+  @@index([userId])
+  @@index([habitAddingId])
+  @@map("micro_habits")
+}
+
+model HabitAdding {
+  id          String         @id @default(uuid())
+  title       String       
+  description String? 
+  habitStatus HabitStatus    @default(PENDING)       
+  microHabits MicroHabit[]  
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+}
+
+enum HabitStatus {
+  PENDING
+  COMPLETED
+  MISSED
+}

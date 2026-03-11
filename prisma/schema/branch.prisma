@@ -1,0 +1,22 @@
+model Branch {
+  id String @id @default(uuid())
+
+  branchName       String            @default("") @map("branch_name")
+  subdomain        String            @unique @default("")
+  branchEmail      String            @unique @default("") @map("branch_email")
+  staffCount       String            @default("0") @map("staff_count")
+  tenantId         String            @map("tenant_id")
+  tenant           Tenant            @relation(fields: [tenantId], references: [id], onDelete: Cascade)
+  managers         BranchManager[]
+  users            User[]
+  sessions         Session[]
+  metrics          Metric[]
+  huddles          Huddle[]
+  habitAssignments HabitAssignment[]
+  programs         Program[]
+  createdAt        DateTime          @default(now()) @map("created_at")
+  updatedAt        DateTime          @updatedAt @map("updated_at")
+
+  @@index([tenantId])
+  @@map("branches")
+}

@@ -1,0 +1,32 @@
+model Subscription {
+  id                   String             @id @default(uuid())
+  planName             SubscribePlaneName @unique @default(STARTER) @map("plan_name")
+  planTitle            String?            @default("") @map("plan_title")
+  planFeatures         String[]           @default([]) @map("plan_features")
+  subscribeStatus      SubscribeStatus    @default(ACTIVE) @map("subscribe_status")
+  billingCycle         BillingCycle       @default(MONTHLY) @map("billing_cycle")
+  amount               String?            @default("0.00")
+  duration             String?
+  invoice              Invoice[]
+  createdAt            DateTime           @default(now()) @map("created_at")
+  updatedAt            DateTime           @updatedAt @map("updated_at")
+
+  @@map("subscriptions")
+}
+
+enum SubscribePlaneName {
+  STARTER
+  GROWTH
+  ENTERPRISE
+}
+
+enum SubscribeStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+}
+
+enum BillingCycle {
+  MONTHLY
+  ANNUAL
+}

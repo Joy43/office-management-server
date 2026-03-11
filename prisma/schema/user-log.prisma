@@ -1,0 +1,15 @@
+model UsageLog {
+  id        String   @id @default(uuid())
+  tenantId  String   @map("tenant_id")
+  metric    String   @default("")
+  value     String   @default("")
+  date      DateTime @db.Date
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  // ---------Relations---------------
+  tenant    Tenant   @relation(fields: [tenantId], references: [id])
+
+  @@index([tenantId, date])
+  @@index([metric, date])
+  @@map("usage_logs")
+}

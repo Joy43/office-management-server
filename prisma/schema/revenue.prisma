@@ -1,0 +1,13 @@
+model Revenue {
+    id          String    @id @default(uuid())
+    invoiceId   String    @unique
+    amount      String    @default("0")
+    currency    String    @default("USD")
+    source      String?   @default("") 
+    receivedAt  DateTime  @map("received_at")
+    createdAt   DateTime  @default(now()) @map("created_at")
+    invoice     Invoice @relation(fields: [invoiceId],references: [id])
+    updatedAt   DateTime  @updatedAt @map("updated_at")
+    @@index([invoiceId])
+    @@map("revenues")
+}
