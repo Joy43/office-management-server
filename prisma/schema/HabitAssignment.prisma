@@ -1,0 +1,20 @@
+model HabitAssignment {
+  id String @id @default(uuid())
+
+  assignedBy String   @map("assigned_by")
+  startDate  DateTime @map("start_date")
+  endDate    DateTime @map("end_date")
+  createdAt  DateTime @default(now()) @map("created_at")
+
+  // Relations
+  habitId        String     @map("habit_id")
+  userId         String?    @map("user_id")
+  branchId       String?    @map("branch_id")
+  habit          MicroHabit @relation(fields: [habitId], references: [id], onDelete: Cascade)
+  user           User?      @relation("HabitAssignmentUser", fields: [userId], references: [id])
+  branch         Branch?    @relation(fields: [branchId], references: [id])
+  assignedByUser User       @relation("HabitAssignmentAssigner", fields: [assignedBy], references: [id])
+
+  @@index([habitId, branchId, userId])
+  @@map("habit_assignments")
+}

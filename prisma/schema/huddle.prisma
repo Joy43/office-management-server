@@ -1,0 +1,59 @@
+model Huddle {
+  id           String       @id @default(uuid())
+  topic        String       @default("") @map("topic")
+  duration     String       @default("15") @map("duration")
+  meetLink     String?      @default("") @map("meet_link")
+  HuddleStatus HuddleStatus @default(scheduled) @map("huddle_status")
+  startTime    String       @default("") @map("start_time")
+  selectedDate String       @default("") @map("selected_date")
+  // Relations
+
+  creatorId            String              @map("creator_id")
+  branchId             String?             @map("branch_id")
+  branch               Branch?             @relation(fields: [branchId], references: [id])
+  creator              User                @relation("HuddleCreator", fields: [creatorId], references: [id])
+  membersParticipating User[]              @relation("HuddleParticipants")
+  participantStatuses  HuddleParticipant[]
+  createdAt            DateTime            @default(now()) @map("created_at")
+  updatedAt            DateTime            @updatedAt @map("updated_at")
+
+  @@index([branchId])
+  @@map("huddles")
+}
+
+enum HuddleStatus {
+  scheduled
+  completed
+  cancelled
+}
+
+model HuddleParticipant {
+  id String @id @default(uuid())
+
+  huddleId String @map("huddle_id")
+  userId   String @map("user_id")
+
+  status      ParticipantStatus @default(pending)
+  completedAt DateTime?         @map("completed_at")
+  joinedAt    DateTime?         @map("joined_at")
+  notes       String?           @default("")
+
+  // Relations
+  huddle Huddle @relation(fields: [huddleId], references: [id], onDelete: Cascade)
+  user   User   @relation("HuddleParticipantStatus", fields: [userId], references: [id], onDelete: Cascade)
+
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@unique([huddleId, userId])
+  @@index([huddleId])
+  @@index([userId])
+  @@map("huddle_participants")
+}
+
+enum ParticipantStatus {
+  pending
+  joined
+  completed
+  absent
+}

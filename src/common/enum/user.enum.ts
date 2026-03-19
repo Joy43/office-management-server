@@ -1,0 +1,10 @@
+export enum UserEnum {
+  USER = 'USER',
+  ADMIN = 'ADMIN',
+  SUPER_ADMIN = 'SUPER_ADMIN',
+  CLIENT_ADMIN = 'CLIENT_ADMIN',
+  MANAGER = 'MANAGER',
+  TAINER = 'TAINER',
+  EXECUTIVE = 'EXECUTIVE',
+  STAFF = 'STAFF',
+}

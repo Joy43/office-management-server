@@ -1,0 +1,29 @@
+model NotificationToggle {
+  id               String  @id @default(uuid())
+  email            Boolean @default(true)
+  userUpdates      Boolean @default(true)
+  review           Boolean @default(true)
+  message          Boolean @default(true)
+  userRegistration Boolean @default(true)
+   createBranch     Boolean @default(true)
+  createHuddle     Boolean @default(true)
+  useTemplate      Boolean @default(true)
+  createSessions   Boolean @default(true)
+  NotificationType NotificationTypeEnum
+  userId String @unique
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("notification-toggle")
+}
+
+enum NotificationTypeEnum {
+  review
+  message
+  userRegistration
+  userUpdates
+  createBranch //client admin create notify super admin 
+  createHuddle //manager create notify client admin
+  useTemplate // super admin create notify client admin
+  createSessions // when trainer create session notify client admin & client admin create session notify trainer
+}
+

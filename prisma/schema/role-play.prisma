@@ -1,0 +1,19 @@
+model Roleplay {
+id String @id @default(uuid())
+tenantId String @map("tenant_id")
+sessionId String? @map("session_id")
+userId String @map("user_id")
+scenarioId String? @map("scenario_id")
+score Int? 
+coachNotes String? @map("coach_notes") @db.Text
+videoUrl String? @map("video_url") @db.Text
+createdAt DateTime @default(now()) @map("created_at")
+
+// Relations
+session Session? @relation(fields: [sessionId], references: [id])
+user User @relation(fields: [userId], references: [id])
+scenario RoleplayScenario? @relation(fields: [scenarioId], references: [id])
+
+@@index([tenantId, userId])
+@@map("roleplays")
+}

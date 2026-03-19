@@ -1,0 +1,32 @@
+model Tenant {
+  id           String       @id @default(uuid())
+  companyName  String       @map("company_name")
+  subdomain    String       @unique @default("")
+  companyEmail String       @unique @default("") @map("company_email")
+  status       TenantStatus @default(ACTIVE)
+  locale       String?      @default("en")
+  timezone     String?      @default("Africa/Accra")
+  isVerified   Boolean      @default(false)      
+  // --------------- Relations --------------------
+  branches      Branch[]
+  usageLogs     UsageLog[]
+  users         User[]
+  invoice       Invoice[]
+  dashboardTemplates Template[]
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+
+  @@index([status])
+  @@index([createdAt])
+  @@index([status, createdAt])
+  @@index([locale])
+  @@index([timezone])
+  @@map("tenants")
+}
+
+enum TenantStatus {
+  ACTIVE
+  INACTIVE
+  SUSPENDED
+  DELETED
+}

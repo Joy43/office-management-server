@@ -1,0 +1,25 @@
+model Invoice {
+  id              String            @id @default(uuid())
+  tenantId        String            @map("tenant_id")
+  subscriptionId  String?           @map("subscription_id")
+  amount          String            @default("0")
+  currency        String            @default("USD")
+  status          InvoiceStatusEnum @default(pending)
+  dueDate         DateTime          @map("due_date")
+  paidAt          DateTime?         @map("paid_at")
+  tenant          Tenant            @relation(fields: [tenantId], references: [id])
+  subscription    Subscription?     @relation(fields: [subscriptionId], references: [id])
+  revenue         Revenue?
+  stripeInvoiceId String?           @unique @map("stripe_invoice_id")
+  createdAt       DateTime          @default(now()) @map("created_at")
+  updatedAt       DateTime          @updatedAt @map("updated_at")
+
+  @@index([tenantId, status])
+  @@map("invoices")
+}
+
+enum InvoiceStatusEnum {
+  pending
+  paid
+  overdue
+}

@@ -1,0 +1,15 @@
+model BranchManager {
+    id String @id @default(uuid())
+
+    branchId  String   @map("branch_id")
+    managerId String   @map("manager_id")
+    branch    Branch   @relation(fields: [branchId], references: [id], onDelete: Cascade)
+    manager   User     @relation(fields: [managerId], references: [id], onDelete: Cascade)
+    createdAt DateTime @default(now()) @map("created_at")
+    updatedAt DateTime @updatedAt @map("updated_at")
+
+    @@unique([branchId, managerId])
+    @@index([branchId])
+    @@index([managerId])
+    @@map("branch_managers")
+}
