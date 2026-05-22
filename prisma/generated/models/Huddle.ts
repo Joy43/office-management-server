@@ -1798,6 +1798,11 @@ export type HuddleFindManyArgs<ExtArgs extends runtime.Types.Extensions.Internal
    * Skip the first `n` Huddles.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Huddles.
+   */
   distinct?: Prisma.HuddleScalarFieldEnum | Prisma.HuddleScalarFieldEnum[]
 }
 

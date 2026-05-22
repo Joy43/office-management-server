@@ -1196,6 +1196,11 @@ export type UserOtpFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Skip the first `n` UserOtps.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of UserOtps.
+   */
   distinct?: Prisma.UserOtpScalarFieldEnum | Prisma.UserOtpScalarFieldEnum[]
 }
 

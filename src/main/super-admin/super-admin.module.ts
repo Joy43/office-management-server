@@ -6,6 +6,11 @@ import { PlatformRevenueModule } from './platform-revenue/platform-revenue.modul
 @Module({
   controllers: [],
   providers: [],
-  imports: [TenantModule,SubscriptionPlanModule, GlobalTemplateModule, PlatformRevenueModule]
+  imports: [
+    TenantModule,
+    SubscriptionPlanModule,
+    GlobalTemplateModule,
+    PlatformRevenueModule,
+  ],
 })
 export class SuperAdminModule {}

@@ -10,9 +10,7 @@ import { StaffHabitsService } from '../service/staff.habits.service';
 @ApiTags('Staff ---------------------- My Habits')
 @Controller('staff-habits')
 export class StaffMyHabitsController {
-  constructor(
-    private readonly staffMyHabitsService: StaffHabitsService,
-  ) {}
+  constructor(private readonly staffMyHabitsService: StaffHabitsService) {}
 
   // -------------GET MY Habits  --------------------
   @ApiOperation({ summary: 'Get My Habits All roles supported this api' })

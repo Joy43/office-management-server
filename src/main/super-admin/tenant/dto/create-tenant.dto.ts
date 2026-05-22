@@ -1,7 +1,12 @@
 import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
 import { TenantStatus } from '@prisma';
-import { IsEmail, IsEnum, IsOptional, IsString, MinLength } from 'class-validator';
-
+import {
+  IsEmail,
+  IsEnum,
+  IsOptional,
+  IsString,
+  MinLength,
+} from 'class-validator';
 
 export class CreateTenantDto {
   @ApiProperty({
@@ -50,7 +55,7 @@ export class CreateTenantDto {
   })
   @IsOptional()
   @IsString()
-  planId?:string
+  planId?: string;
 
   @ApiPropertyOptional({
     example: 'Africa/Accra',

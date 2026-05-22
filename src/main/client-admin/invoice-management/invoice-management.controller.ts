@@ -17,10 +17,11 @@ export class InvoiceManagementController {
   @ApiBearerAuth()
   @ValidateClientAdmin()
   @Get('payment-history-client-admin')
-  findAllPaymentHistory(@GetUser('sub') userId: string,
-@Query() query:GetClientAdminPaymentHistoryDto
-) {
-    return this.invoiceManagementService.findAllPaymentHistory(userId,query);
+  findAllPaymentHistory(
+    @GetUser('sub') userId: string,
+    @Query() query: GetClientAdminPaymentHistoryDto,
+  ) {
+    return this.invoiceManagementService.findAllPaymentHistory(userId, query);
   }
 
   // ---------get details of a particular invoice----------

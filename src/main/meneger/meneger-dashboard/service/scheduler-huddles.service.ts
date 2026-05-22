@@ -31,7 +31,6 @@ export class SchedulerHuddlesService {
         return;
       }
 
-    
       const huddlesToComplete: string[] = [];
 
       for (const huddle of scheduledHuddles) {
@@ -44,8 +43,6 @@ export class SchedulerHuddlesService {
             continue;
           }
 
-        
-        
           const huddleDateTime = new Date(
             `${huddle.selectedDate}T${huddle.startTime}:00`,
           );

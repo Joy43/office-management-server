@@ -1,8 +1,8 @@
-import { ApiProperty, ApiPropertyOptional } from "@nestjs/swagger";
-import { IsOptional, IsString } from "class-validator";
+import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
+import { IsOptional, IsString } from 'class-validator';
 
 export class MyHabitsSearchDto {
- @ApiPropertyOptional({
+  @ApiPropertyOptional({
     description: 'Search by habit name or description',
   })
   @IsOptional()
@@ -22,5 +22,5 @@ export class MyHabitsSearchDto {
     default: 10,
   })
   @IsOptional()
-  limit?: number; 
+  limit?: number;
 }

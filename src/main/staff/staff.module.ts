@@ -18,7 +18,7 @@ import { StaffMySessionsService } from './service/staff.my-sessions.service';
   providers: [
     StaffDashboardService,
     StaffMySessionsService,
-  
+
     StaffHabitsService,
   ],
 })

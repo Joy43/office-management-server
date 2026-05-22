@@ -1168,6 +1168,11 @@ export type RevenueFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Skip the first `n` Revenues.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Revenues.
+   */
   distinct?: Prisma.RevenueScalarFieldEnum | Prisma.RevenueScalarFieldEnum[]
 }
 

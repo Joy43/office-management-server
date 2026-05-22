@@ -11,7 +11,7 @@ import { TenantController } from './tenant.controller';
     TenantService,
     MailService,
     AccountConfirmationTemplate,
-    TenantManageService
+    TenantManageService,
   ],
 })
 export class TenantModule {}

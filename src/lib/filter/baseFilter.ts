@@ -73,7 +73,10 @@ export class BaseFilter {
   @IsEnum(ProgramStatus)
   programStatus?: ProgramStatus;
 
-  @ApiPropertyOptional({ enum: SubscribeStatus, example: SubscribeStatus.ACTIVE })
+  @ApiPropertyOptional({
+    enum: SubscribeStatus,
+    example: SubscribeStatus.ACTIVE,
+  })
   @IsOptional()
   @IsEnum(SubscribeStatus)
   subscribeStatus?: SubscribeStatus;

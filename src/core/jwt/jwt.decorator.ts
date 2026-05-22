@@ -49,26 +49,44 @@ export function ValidateClientAdmin() {
 }
 
 export function ValidateStaff() {
-  return ValidateAuth(UserEnum.STAFF, UserEnum.CLIENT_ADMIN, UserEnum.SUPER_ADMIN);
+  return ValidateAuth(
+    UserEnum.STAFF,
+    UserEnum.CLIENT_ADMIN,
+    UserEnum.SUPER_ADMIN,
+  );
 }
 
 export function ValidateExecutive() {
-  return ValidateAuth(UserEnum.EXECUTIVE, UserEnum.CLIENT_ADMIN, UserEnum.SUPER_ADMIN);
+  return ValidateAuth(
+    UserEnum.EXECUTIVE,
+    UserEnum.CLIENT_ADMIN,
+    UserEnum.SUPER_ADMIN,
+  );
 }
 
 export function ValidateMANAGER() {
-  return ValidateAuth(UserEnum.MANAGER, UserEnum.CLIENT_ADMIN, UserEnum.SUPER_ADMIN);
+  return ValidateAuth(
+    UserEnum.MANAGER,
+    UserEnum.CLIENT_ADMIN,
+    UserEnum.SUPER_ADMIN,
+  );
 }
 
 export function ValidateTraniner() {
-  return ValidateAuth(UserEnum.TAINER, UserEnum.CLIENT_ADMIN, UserEnum.SUPER_ADMIN);
+  return ValidateAuth(
+    UserEnum.TAINER,
+    UserEnum.CLIENT_ADMIN,
+    UserEnum.SUPER_ADMIN,
+  );
 }
 
 export function ValidateTraninerMANAGER() {
-  return ValidateAuth(UserEnum.MANAGER, UserEnum.CLIENT_ADMIN, UserEnum.SUPER_ADMIN);
+  return ValidateAuth(
+    UserEnum.MANAGER,
+    UserEnum.CLIENT_ADMIN,
+    UserEnum.SUPER_ADMIN,
+  );
 }
-
-
 
 export function ValidateInternalUser() {
   return ValidateAuth(

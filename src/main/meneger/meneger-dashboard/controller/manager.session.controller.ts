@@ -64,24 +64,24 @@ export class MANAGERDashboardSessionController {
   }
 
   // ---------get all sessions  ----------
- // Updated Controller
-@ApiOperation({ summary: 'Get all Sessions with pagination and search' })
-@Post('get-all-sessions')
-@ApiBearerAuth()
-@ValidateInternalUser()
-async getAllSessions(
-  @GetUser('sub') speakerId: string,
-  @Body() dto: GetAllSessionsDto,
-) {
-  return await this.MANAGERDashboardSessionService.getAllSessions(
-    speakerId,
-    dto.page,
-    dto.limit,
-    dto.search,
-    dto.status,
-    dto.sessionType,
-  );
-}
+  // Updated Controller
+  @ApiOperation({ summary: 'Get all Sessions with pagination and search' })
+  @Post('get-all-sessions')
+  @ApiBearerAuth()
+  @ValidateInternalUser()
+  async getAllSessions(
+    @GetUser('sub') speakerId: string,
+    @Body() dto: GetAllSessionsDto,
+  ) {
+    return await this.MANAGERDashboardSessionService.getAllSessions(
+      speakerId,
+      dto.page,
+      dto.limit,
+      dto.search,
+      dto.status,
+      dto.sessionType,
+    );
+  }
 
   // ------------------get session by id --------------------
   @ApiOperation({ summary: 'Get Session by ID || access all roles' })

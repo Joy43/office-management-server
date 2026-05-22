@@ -1653,6 +1653,11 @@ export type HabitAssignmentFindManyArgs<ExtArgs extends runtime.Types.Extensions
    * Skip the first `n` HabitAssignments.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of HabitAssignments.
+   */
   distinct?: Prisma.HabitAssignmentScalarFieldEnum | Prisma.HabitAssignmentScalarFieldEnum[]
 }
 

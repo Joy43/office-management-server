@@ -1413,6 +1413,11 @@ export type HabitLogFindManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Skip the first `n` HabitLogs.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of HabitLogs.
+   */
   distinct?: Prisma.HabitLogScalarFieldEnum | Prisma.HabitLogScalarFieldEnum[]
 }
 

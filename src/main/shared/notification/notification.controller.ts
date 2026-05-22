@@ -1,4 +1,13 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, Query } from '@nestjs/common';
+import {
+  Controller,
+  Get,
+  Post,
+  Body,
+  Patch,
+  Param,
+  Delete,
+  Query,
+} from '@nestjs/common';
 import { NotificationService } from './notification.service';
 import { ApiBearerAuth, ApiOperation } from '@nestjs/swagger';
 import { GetUser, ValidateInternalUser } from '@/core/jwt/jwt.decorator';
@@ -7,7 +16,7 @@ import { GetUser, ValidateInternalUser } from '@/core/jwt/jwt.decorator';
 export class NotificationController {
   constructor(private readonly notificationService: NotificationService) {}
 
- // -------get all notification their own notification------
+  // -------get all notification their own notification------
   @ApiBearerAuth()
   @ValidateInternalUser()
   @ApiOperation({ summary: 'Get all notifications for the logged-in user' })

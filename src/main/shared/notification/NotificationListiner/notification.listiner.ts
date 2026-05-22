@@ -224,6 +224,4 @@ export class NotificationListener {
 
     this.logger.log('HUDDLE_CREATE event processing complete');
   }
-
-  
 }

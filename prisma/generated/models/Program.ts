@@ -1469,6 +1469,11 @@ export type ProgramFindManyArgs<ExtArgs extends runtime.Types.Extensions.Interna
    * Skip the first `n` Programs.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Programs.
+   */
   distinct?: Prisma.ProgramScalarFieldEnum | Prisma.ProgramScalarFieldEnum[]
 }
 

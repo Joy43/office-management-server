@@ -8,14 +8,15 @@ import { PrismaService } from '@/lib/prisma/prisma.service';
 @Injectable()
 export class NotificationService {
   constructor(private readonly prisma: PrismaService) {}
-   // --------------- Get all notifications for a user --------------------------
+  // --------------- Get all notifications for a user --------------------------
   @HandleError('Failed to get all notifications')
   async getAllNotifications(userId: string): Promise<TResponse<any>> {
-    const userNotifications = await this.prisma.client.userNotification.findMany({
-      where: { userId },
-      orderBy: { createdAt: 'desc' },
-      include: { notification: true },
-    });
+    const userNotifications =
+      await this.prisma.client.userNotification.findMany({
+        where: { userId },
+        orderBy: { createdAt: 'desc' },
+        include: { notification: true },
+      });
 
     const totalCount = userNotifications.length;
     const unreadCount = userNotifications.filter((un) => !un.read).length;

@@ -38,14 +38,14 @@ export class AuthLoginService {
       );
 
       return {
-        success:false,
+        success: false,
         message: 'Email is not verified. Verification code sent to email.',
-        status:HttpStatus.BAD_REQUEST,
+        status: HttpStatus.BAD_REQUEST,
         data: {
           email: user.email,
-          id:user.id
-        }
-      }
+          id: user.id,
+        },
+      };
     }
 
     // 2. Regular login

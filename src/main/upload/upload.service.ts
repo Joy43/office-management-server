@@ -17,10 +17,7 @@ import { FileType } from '@prisma';
 @ApiTags('aws-file-upload-additional-all')
 @Controller('aws-file-upload-additional-all')
 export class UploadS3Service {
-  constructor(
-    private readonly s3FileService: S3FileService,
-    
-  ) {}
+  constructor(private readonly s3FileService: S3FileService) {}
 
   @Post('upload-s3-additional')
   @ApiConsumes('multipart/form-data')

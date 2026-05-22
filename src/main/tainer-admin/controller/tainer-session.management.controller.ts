@@ -31,22 +31,23 @@ export class TainerSessionManagementController {
   }
 
   // ----------------------get upcoming session----------------------
-// Updated Controller
-@ApiOperation({
-  summary: 'Get upcoming session || access trainer || this api use also trainer flow',
-})
-@ValidateTraniner()
-@ApiBearerAuth()
-@Get('upcoming-sessions')
-getUpcomingSessions(
-  @GetUser('sub') trainerId: string,
-  @Query() dto: GetUpcomingSessionsDto,
-) {
-  return this.tainerSessionManagementService.getUpcomingSessions(
-    trainerId,
-    dto.page,
-    dto.limit,
-    dto.search,
-  );
-}
+  // Updated Controller
+  @ApiOperation({
+    summary:
+      'Get upcoming session || access trainer || this api use also trainer flow',
+  })
+  @ValidateTraniner()
+  @ApiBearerAuth()
+  @Get('upcoming-sessions')
+  getUpcomingSessions(
+    @GetUser('sub') trainerId: string,
+    @Query() dto: GetUpcomingSessionsDto,
+  ) {
+    return this.tainerSessionManagementService.getUpcomingSessions(
+      trainerId,
+      dto.page,
+      dto.limit,
+      dto.search,
+    );
+  }
 }

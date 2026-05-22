@@ -3,7 +3,6 @@ import { PrismaService } from '@/lib/prisma/prisma.service';
 import { AuthUtilsService } from '@/lib/utils/services/auth-utils.service';
 import { Injectable, Logger, OnModuleInit } from '@nestjs/common';
 
-
 @Injectable()
 export class DefaultUsersService implements OnModuleInit {
   private readonly logger = new Logger(DefaultUsersService.name);
@@ -27,7 +26,7 @@ export class DefaultUsersService implements OnModuleInit {
         profilePicture: 'https://i.pravatar.cc/200?img=12',
         phone: '123538545329899',
       },
-        {
+      {
         name: 'CLEINT ADMIN',
         email: 'executive@gmail.com',
         password: '12345678',
@@ -36,8 +35,7 @@ export class DefaultUsersService implements OnModuleInit {
         phone: '123869322899',
       },
 
-
-       {
+      {
         name: 'EXECUTIVE',
         email: 'executive@gmail.com',
         password: '12345678',
@@ -46,21 +44,21 @@ export class DefaultUsersService implements OnModuleInit {
         phone: '123869322899',
       },
       {
-         name: 'MANAGER',
+        name: 'MANAGER',
         email: 'manager@gmail.com',
         password: '12345678',
         role: 'MANAGER',
         profilePicture: 'https://i.pravatar.cc/200?img=59',
         phone: '1238656922899',
-      }
-      ,{
-         name: 'TAINER',
+      },
+      {
+        name: 'TAINER',
         email: 'trainer@gmail.com',
         password: '12345678',
         role: 'TAINER',
         profilePicture: 'https://i.pravatar.cc/200?img=59',
         phone: '1238656922899',
-      }
+      },
     ];
     for (const user of users) {
       const exists = await this.prisma.client.user.findFirst({

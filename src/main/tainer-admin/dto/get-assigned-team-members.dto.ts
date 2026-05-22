@@ -12,10 +12,10 @@ export enum HabitStatusFilter {
 }
 
 export class GetAssignedTeamMembersDto {
-  @ApiPropertyOptional({ 
-    description: 'Page number', 
+  @ApiPropertyOptional({
+    description: 'Page number',
     default: 1,
-    minimum: 1 
+    minimum: 1,
   })
   @IsOptional()
   @Type(() => Number)
@@ -23,10 +23,10 @@ export class GetAssignedTeamMembersDto {
   @Min(1)
   page?: number = 1;
 
-  @ApiPropertyOptional({ 
-    description: 'Number of items per page', 
+  @ApiPropertyOptional({
+    description: 'Number of items per page',
     default: 10,
-    minimum: 1 
+    minimum: 1,
   })
   @IsOptional()
   @Type(() => Number)
@@ -34,22 +34,22 @@ export class GetAssignedTeamMembersDto {
   @Min(1)
   limit?: number = 10;
 
-  @ApiPropertyOptional({ 
+  @ApiPropertyOptional({
     description: 'Search by name, email, or phone',
-    example: 'John Doe' 
+    example: 'John Doe',
   })
   @IsOptional()
-  @Transform(({ value }) => value === '' ? undefined : value)
+  @Transform(({ value }) => (value === '' ? undefined : value))
   @IsString()
   search?: string;
 
-  @ApiPropertyOptional({ 
+  @ApiPropertyOptional({
     description: 'Filter by status',
     enum: HabitStatusFilter,
-    example: HabitStatusFilter.GREAT
+    example: HabitStatusFilter.GREAT,
   })
   @IsOptional()
-  @Transform(({ value }) => value === '' ? undefined : value)
+  @Transform(({ value }) => (value === '' ? undefined : value))
   @IsEnum(HabitStatusFilter)
   status?: HabitStatusFilter;
 }

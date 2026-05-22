@@ -384,7 +384,7 @@ export class StaffDashboardService {
     // Start from 12 months ago
     const startDate = new Date(today);
     startDate.setMonth(today.getMonth() - 11);
-    startDate.setDate(1); 
+    startDate.setDate(1);
     startDate.setHours(0, 0, 0, 0);
 
     // Get active habit assignments
@@ -421,7 +421,7 @@ export class StaffDashboardService {
       monthStart.setMonth(startDate.getMonth() + i);
       const monthEnd = new Date(monthStart);
       monthEnd.setMonth(monthStart.getMonth() + 1);
-      monthEnd.setDate(0); 
+      monthEnd.setDate(0);
       monthEnd.setHours(23, 59, 59, 999);
 
       // Don't go beyond today

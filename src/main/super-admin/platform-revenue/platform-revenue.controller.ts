@@ -5,7 +5,6 @@ import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { PlatformRevenueService } from './platform-revenue.service';
 import { RevenueFilterDto, TotalOrderListDto } from './dto/revenueFilter.dto';
 
-
 @ApiTags('Super Admin--------------Platform Revenue, platform overview')
 @Controller('platform-revenue')
 export class PlatformRevenueController {

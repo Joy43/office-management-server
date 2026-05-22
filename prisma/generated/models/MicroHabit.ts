@@ -1653,6 +1653,11 @@ export type MicroHabitFindManyArgs<ExtArgs extends runtime.Types.Extensions.Inte
    * Skip the first `n` MicroHabits.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of MicroHabits.
+   */
   distinct?: Prisma.MicroHabitScalarFieldEnum | Prisma.MicroHabitScalarFieldEnum[]
 }
 

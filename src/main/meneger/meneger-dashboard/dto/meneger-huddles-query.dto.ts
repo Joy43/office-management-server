@@ -50,7 +50,6 @@ export class MANAGERHuddlesQueryDto {
   @IsEnum(HuddleStatus)
   status?: HuddleStatus;
 
-
   @ApiPropertyOptional({
     example: '2026-01-15',
     description: 'Filter by selected date (YYYY-MM-DD format)',

@@ -12,49 +12,49 @@ export class DashboardTemplateService {
   constructor(private readonly prisma: PrismaService) {}
 
   // ------------------------getOwnTemplates----------------------
-// dashboard-template.service.ts
-@HandleError('DashboardTemplateService.getOwnTemplates error')
-async getOwnTemplates(tenantId: string, dto: GetOwnTemplatesDto) {
-  const { search, page = 1, limit = 10 } = dto;
+  // dashboard-template.service.ts
+  @HandleError('DashboardTemplateService.getOwnTemplates error')
+  async getOwnTemplates(tenantId: string, dto: GetOwnTemplatesDto) {
+    const { search, page = 1, limit = 10 } = dto;
 
-  const skip = (page - 1) * limit;
+    const skip = (page - 1) * limit;
 
-  const whereCondition: any = {
-    OR: [{ tenantId }, { isGlobal: true }],
-  };
-
-  if (search) {
-    whereCondition.templateName = {
-      contains: search,
-      mode: 'insensitive',
+    const whereCondition: any = {
+      OR: [{ tenantId }, { isGlobal: true }],
     };
-  }
 
-  const [templates, total] = await Promise.all([
-    this.prisma.client.template.findMany({
-      where: whereCondition,
-      orderBy: { createdAt: 'desc' },
-      skip,
-      take: limit,
-    }),
-    this.prisma.client.template.count({
-      where: whereCondition,
-    }),
-  ]);
+    if (search) {
+      whereCondition.templateName = {
+        contains: search,
+        mode: 'insensitive',
+      };
+    }
 
-  return successResponse(
-    {
-      templates,
-      meta: {
-        total,
-        page,
-        limit,
-        totalPages: Math.ceil(total / limit),
+    const [templates, total] = await Promise.all([
+      this.prisma.client.template.findMany({
+        where: whereCondition,
+        orderBy: { createdAt: 'desc' },
+        skip,
+        take: limit,
+      }),
+      this.prisma.client.template.count({
+        where: whereCondition,
+      }),
+    ]);
+
+    return successResponse(
+      {
+        templates,
+        meta: {
+          total,
+          page,
+          limit,
+          totalPages: Math.ceil(total / limit),
+        },
       },
-    },
-    'Templates retrieved successfully',
-  );
-}
+      'Templates retrieved successfully',
+    );
+  }
 
   // ------------------------ Tenent Active Plan ----------------------
   @HandleError(' DashboardTemplateService.TenentActivePlan error')

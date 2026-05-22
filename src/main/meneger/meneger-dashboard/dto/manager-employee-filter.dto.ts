@@ -27,13 +27,13 @@ export class ManagerEmployeeFilterDto {
   @IsEnum(EmployeeStatusFilter)
   status?: EmployeeStatusFilter;
 
-//   @ApiPropertyOptional({
-//     description: 'Filter by assigned trainer ID',
-//     example: 'uuid-trainer-id',
-//   })
-//   @IsOptional()
-//   @IsString()
-//   assignedTrainerId?: string;
+  //   @ApiPropertyOptional({
+  //     description: 'Filter by assigned trainer ID',
+  //     example: 'uuid-trainer-id',
+  //   })
+  //   @IsOptional()
+  //   @IsString()
+  //   assignedTrainerId?: string;
 
   @ApiPropertyOptional({
     description: 'Page number for pagination',

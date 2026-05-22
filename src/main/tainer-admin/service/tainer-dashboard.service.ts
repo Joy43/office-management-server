@@ -19,7 +19,7 @@ export class TainerAdminDashboardService {
     /* ---------------- SESSIONS THIS MONTH ---------------- */
     const sessionsThisMonth = await this.prisma.client.session.count({
       where: {
-        user: { tenantId },  
+        user: { tenantId },
         createdAt: { gte: startOfMonth },
       },
     });

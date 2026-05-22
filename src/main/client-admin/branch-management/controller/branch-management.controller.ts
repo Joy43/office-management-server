@@ -78,7 +78,9 @@ export class BranchManagementController {
   // ----------------get their own branch users------------------
   @ValidateClientAdmin()
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'users get || Get all users in a Branch || inter branch id' })
+  @ApiOperation({
+    summary: 'users get || Get all users in a Branch || inter branch id',
+  })
   @Get(':id/users')
   findAllUsersInBranch(@Param('id') id: string) {
     return this.branchManagementService.findAllUsersInBranch(id);
@@ -87,11 +89,13 @@ export class BranchManagementController {
   // ----------------get their own branch managers------------------
   @ValidateClientAdmin()
   @ApiBearerAuth()
-  @ApiOperation({ summary: 'managers get || Get all managers in a Branch || inter branch id' })
+  @ApiOperation({
+    summary: 'managers get || Get all managers in a Branch || inter branch id',
+  })
   @Get(':id/managers')
   findAllManagersInBranch(@Param('id') id: string) {
     return this.branchManagementService.findAllManagersInBranch(id);
-  } 
+  }
   // -------------- Delete a Branch----------------------
   @ApiOperation({ summary: 'Delete a Branch' })
   @ApiBearerAuth()

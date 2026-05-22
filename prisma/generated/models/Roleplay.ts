@@ -1602,6 +1602,11 @@ export type RoleplayFindManyArgs<ExtArgs extends runtime.Types.Extensions.Intern
    * Skip the first `n` Roleplays.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of Roleplays.
+   */
   distinct?: Prisma.RoleplayScalarFieldEnum | Prisma.RoleplayScalarFieldEnum[]
 }
 

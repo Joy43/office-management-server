@@ -61,7 +61,10 @@ export class DashboardTemplateController {
 
   // ----------------- client admin their own created templates get all ----------------------
 
-  @ApiOperation({ summary: 'Get all templates created by the client admin || All templates superadmin dashboard already here, use superadmin api' })
+  @ApiOperation({
+    summary:
+      'Get all templates created by the client admin || All templates superadmin dashboard already here, use superadmin api',
+  })
   @ApiBearerAuth()
   @ValidateClientAdmin()
   @Get('own-templates')

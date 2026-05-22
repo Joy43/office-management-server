@@ -5,12 +5,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { EventEmitterModule } from '@nestjs/event-emitter';
 import { JwtModule } from '@nestjs/jwt';
 import { PassportModule } from '@nestjs/passport';
-
 import { ScheduleModule } from '@nestjs/schedule';
 import { ServeStaticModule } from '@nestjs/serve-static';
 import { join } from 'path';
 import { AppController } from './app.controller';
 import { ENVEnum } from './common/enum/env.enum';
+import { CacheModuleConfig } from './core/cache/cache.module';
 import { JwtStrategy } from './core/jwt/jwt.strategy';
 import { LoggerMiddleware } from './core/middleware/logger.middleware';
 import { LibModule } from './lib/lib.module';
@@ -23,8 +23,20 @@ import { MainModule } from './main/main.module';
       isGlobal: true,
     }),
 
-    CacheModule.register({
+    CacheModule.registerAsync({
       isGlobal: true,
+      imports: [ConfigModule],
+      inject: [ConfigService],
+      useFactory: async (configService: ConfigService) => {
+        const host = configService.get<string>(ENVEnum.REDIS_HOST, 'localhost');
+        const port = configService.get<string>(ENVEnum.REDIS_PORT, '6379');
+
+        return {
+          host,
+          port: parseInt(port, 10),
+          ttl: 5 * 60 * 1000, // 5 minutes default TTL
+        };
+      },
     }),
 
     EventEmitterModule.forRoot({
@@ -68,11 +80,11 @@ import { MainModule } from './main/main.module';
       }),
     }),
 
+    CacheModuleConfig,
+
     LibModule,
 
     MainModule,
-
-
   ],
   controllers: [AppController],
   providers: [JwtStrategy],

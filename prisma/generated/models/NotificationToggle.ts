@@ -1300,6 +1300,11 @@ export type NotificationToggleFindManyArgs<ExtArgs extends runtime.Types.Extensi
    * Skip the first `n` NotificationToggles.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of NotificationToggles.
+   */
   distinct?: Prisma.NotificationToggleScalarFieldEnum | Prisma.NotificationToggleScalarFieldEnum[]
 }
 

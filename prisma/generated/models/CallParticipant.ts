@@ -1297,6 +1297,11 @@ export type CallParticipantFindManyArgs<ExtArgs extends runtime.Types.Extensions
    * Skip the first `n` CallParticipants.
    */
   skip?: number
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+   * 
+   * Filter by unique combinations of CallParticipants.
+   */
   distinct?: Prisma.CallParticipantScalarFieldEnum | Prisma.CallParticipantScalarFieldEnum[]
 }
 
