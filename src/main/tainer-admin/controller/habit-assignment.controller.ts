@@ -12,6 +12,7 @@ import { CreateScoreHabitsDto } from '../dto/create-score-habits.dto';
 import { GetAssignedTeamMembersDto } from '../dto/get-assigned-team-members.dto';
 import { GetUsersWithHuddlesSessionsDto } from '../dto/get-users-with-huddles-sessions.dto';
 import { HabitAssignmentService } from '../service/habit-assignment.service';
+import { CacheStrategy } from '@/core/cache';
 
 @ApiTags('Tainer Admin ----------------------- Habit Assignment')
 @Controller('habit-assignment')
@@ -24,6 +25,7 @@ export class HabitAssignmentController {
   @ApiOperation({
     summary: 'Get assigned team members with habit tracking',
   })
+  @CacheStrategy('branches:detail', 15 * 60 * 1000)
   @ValidateTraniner()
   @ApiBearerAuth()
   @Get('assigned-team-members')

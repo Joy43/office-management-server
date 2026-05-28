@@ -14,6 +14,7 @@ import { UpdateSubscriptionPlanDto } from './dto/update-subscription-plan.dto';
 import { ApiBearerAuth, ApiOperation, ApiTags } from '@nestjs/swagger';
 import { successResponse } from '@/common/response/response.util';
 import { ValidateAdmin } from '@/core/jwt/jwt.decorator';
+import { CacheStrategy } from '@/core/cache';
 
 @ApiTags('Super Admin ---------- Subscription Plan Management')
 @Controller('subscription-plan')
@@ -42,6 +43,7 @@ export class SubscriptionPlanController {
   }
 
   @Get()
+  @CacheStrategy('branches:detail', 15 * 60 * 1000)
   @ApiOperation({ summary: 'Get all subscription plan' })
   async findAll() {
     const res = await this.subscriptionPlanService.findAll();

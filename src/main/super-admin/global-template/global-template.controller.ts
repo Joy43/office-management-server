@@ -1,4 +1,5 @@
 import { successResponse } from '@/common/response/response.util';
+import { CacheStrategy } from '@/core/cache';
 import { GetUser, ValidateInternalUser } from '@/core/jwt/jwt.decorator';
 import {
   Body,
@@ -41,6 +42,7 @@ export class GlobalTemplateController {
     summary:
       'Get all global templates with filter and pagination || user can get their own templates || internal user access it',
   })
+  @CacheStrategy('branches:detail', 15 * 60 * 1000)
   @ApiBearerAuth()
   @ValidateInternalUser()
   @Get('template')
